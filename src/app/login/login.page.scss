@@ -30,7 +30,7 @@
     text-align: center;
 
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 300% 300%;
+    background-size: 400% 400%;
     animation: gradient 15s ease infinite;
 
     @include tablet-landscape-and-up {
@@ -47,9 +47,14 @@ ion-item.item-has-focus > ion-label {
     color: black !important;
 }
 
+ion-label {
+    opacity: 0.7;
+}
+
 ion-input {
     background-color: transparent;
     font-size: 1.4em;
+    font-weight: bold;
 }
 
 ion-item {
