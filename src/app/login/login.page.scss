@@ -35,12 +35,13 @@
 
     @include tablet-landscape-and-up {
         padding-bottom: 10%;
+        background-size: 200% 200%;
     }
 }
 
 .logo {
-    margin: 5% 0 30px 0;
-    font-size: 120px;
+    margin: 0 0 20px 0;
+    font-size: 170px;
 }
 
 ion-item.item-has-focus > ion-label {
@@ -62,7 +63,7 @@ ion-item {
     border: 3px solid rgba(255, 255, 255, 1);
     --highlight-color-focused: none;
     margin: 20px 0 15px 0;
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: white;
     --border-color: transparent;
     padding-bottom: 5px;
@@ -70,6 +71,8 @@ ion-item {
 
 .button {
     width: 300px;
+    height: 60px;
     margin-top: 25px;
     font-size: 1.1em;
+    --border-radius: 15px;
 }
