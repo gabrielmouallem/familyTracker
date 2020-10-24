@@ -1,0 +1,34 @@
+<ion-content>
+  <ion-fab horizontal="start" vertical="top" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon name="menu"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="end">
+      <ion-fab-button color="light">
+        <ion-icon style="font-size: 2em; opacity: 0.7;" name="people-circle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon style="font-size: 2em; opacity: 0.7;" name="settings-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon style="font-size: 2em;" color="primary" name="arrow-back-circle-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <agm-map
+    class="main-map"
+    (mapReady)="mapReading()"
+    [latitude]="-22.412292"
+    [longitude]="-45.449787"
+    [zoom]="18"
+    disableDefaultUI="false"
+    zoomControl="false"
+    >
+    <agm-marker
+      [latitude]="-22.412292"
+      [longitude]="-45.449787"
+      animation="BOUNCE"
+      iconUrl="../../assets/markers/blue-person-marker.png">
+    </agm-marker>
+  </agm-map>
+</ion-content>

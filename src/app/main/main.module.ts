@@ -1,0 +1,24 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { MainPageRoutingModule } from './main-routing.module';
+
+import { MainPage } from './main.page';
+import { AgmCoreModule } from '@agm/core';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MainPageRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBe3JHlgbT58Bqcib-8oOZluGIONW4vilY'
+    })
+  ],
+  declarations: [MainPage]
+})
+export class MainPageModule {}
