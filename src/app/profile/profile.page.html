@@ -29,7 +29,23 @@
   <ion-toolbar style="margin-top: 20px;">
     <ion-title style="font-size: 1.3em;">Minha Família</ion-title>
   </ion-toolbar>
-  <div class="family-button-container">
+  <div *ngIf="platform === 'ios'">
+    <div class="family-button-container">
+      <ion-button color="danger" class="family-button">
+        <ion-icon name="people-circle-outline" class="family-icon-button"></ion-icon>
+        Cadastrar Minha Família
+      </ion-button>
+    </div>
+  </div>
+  <div *ngIf="platform === 'web'">
+    <div class="family-button-container">
+      <ion-button color="danger" class="family-button">
+        <ion-icon name="people-circle-outline" class="family-icon-button"></ion-icon>
+        Cadastrar Minha Família
+      </ion-button>
+    </div>
+  </div>
+  <div *ngIf="platform === 'android'">
     <ion-button color="danger" class="family-button">
       <ion-icon name="people-circle-outline" class="family-icon-button"></ion-icon>
       Cadastrar Minha Família

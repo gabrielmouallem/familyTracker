@@ -20,7 +20,11 @@ export class MainPage implements OnInit {
   }
 
   navigateToProfilePage() {
-    this.navCtrl.navigateForward('/profile')
+    this.navCtrl.navigateForward('/profile');
+  }
+
+  navigateToLoginPage() {
+    this.navCtrl.navigateBack('/');
   }
 
   ngOnInit() {

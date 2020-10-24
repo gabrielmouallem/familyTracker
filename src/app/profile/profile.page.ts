@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Capacitor } from "@capacitor/core";
 
 @Component({
   selector: 'app-profile',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+
+  platform = 'android';
 
   constructor() { }
 
@@ -19,6 +22,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.platform = Capacitor.platform;
   }
 
 }
