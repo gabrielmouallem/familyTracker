@@ -32,13 +32,14 @@
   <ion-toolbar style="margin-top: 20px;">
     <ion-title style="font-size: 1.3em;">Minha Família</ion-title>
   </ion-toolbar>
-  <div *ngIf="family">
-    <ion-button color="danger" expand="full" style="margin-top: 20px;">
-      <ion-icon name="people-circle-outline" class="family-icon-button"></ion-icon>
-      CADASTRAR MINHA FAMÍLIA
-    </ion-button>
-  </div>
-  <div *ngIf="!family">
+  <ion-card class="card-container" *ngIf="family">
+    <ion-item>
+      <ion-icon name="people-circle-outline" slot="start"></ion-icon>
+      <ion-label>{{family}}</ion-label>
+      <ion-button fill="outline" slot="end">DESVINCULAR</ion-button>
+    </ion-item>
+  </ion-card>
+  <div *ngIf="!familyID">
     <ion-button color="danger" expand="full" style="margin-top: 20px;" class="pulse">
       <ion-icon name="people-circle-outline" class="family-icon-button"></ion-icon>
       CADASTRAR MINHA FAMÍLIA

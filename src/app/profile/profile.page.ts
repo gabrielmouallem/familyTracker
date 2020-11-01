@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { FamilyService } from '../api/family.service';
 import { ProfileService } from '../api/profile.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class ProfilePage implements OnInit {
   name: string;
   email: string;
   age: number;
+  familyID: string;
   family: any;
 
   platform = 'android';
@@ -20,6 +22,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private profileApi: ProfileService,
+    private familyApi: FamilyService,
     private toast: ToastController,
   ) { }
 
@@ -71,7 +74,18 @@ export class ProfilePage implements OnInit {
         this.name = data.name;
         this.email = data.email;
         this.age = data.age;
-        this.family = data?.family;
+        this.familyID = data?.family;
+        if(data?.family){
+          console.log("GetFamily")
+          this.familyApi.getFamily(this.familyID).subscribe(
+            (data: any)=>{
+              this.family = data.surname;
+            },
+            error=>{
+
+            }
+          )
+        }
       },
       error=>{
         this.showToast("Ocorreu um erro" ,3000, "danger");
