@@ -27,6 +27,10 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward('/main');
   }
 
+  navigateToRegisterPage() {
+    this.navCtrl.navigateForward('/register');
+  }
+
   async showToast(message, duration, color="light") {
     const toast = await this.toast.create({
       message: message,

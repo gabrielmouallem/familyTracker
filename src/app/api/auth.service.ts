@@ -12,6 +12,10 @@ export class AuthService {
   ) { }
 
   login(body) {
-    return this.http.post(apiURL+"profile/login", body)
+    return this.http.post(apiURL+"profile/login", body);
+  };
+
+  register(body) {
+    return this.http.post(apiURL+"profile", body);
   }
 }
