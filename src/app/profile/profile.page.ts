@@ -79,7 +79,7 @@ export class ProfilePage implements OnInit {
           console.log("GetFamily")
           this.familyApi.getFamily(this.familyID).subscribe(
             (data: any)=>{
-              this.family = data.surname;
+              this.family = data;
             },
             error=>{
 
