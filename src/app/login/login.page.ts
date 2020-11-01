@@ -23,8 +23,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  navigateToMainPage() {
-    this.navCtrl.navigateForward('/main');
+  navigateToMainPage(id: string) {
+    this.navCtrl.navigateForward('/main?profile_id='+id);
   }
 
   navigateToRegisterPage() {
@@ -43,18 +43,18 @@ export class LoginPage implements OnInit {
 
   doLogin() {
     if (!this.email || !this.password ) {
-      this.showToast('Insira seu email e senha', 3000);
+      this.showToast('Insira seu email e senha', 3000, "danger");
     } else {
         this.authApi.login({
           email: this.email,
           password: this.password
         }).subscribe(
-          data=>{
+          (data: any)=>{
             this.showToast('Bem vindo ao Family Tracker!', 2000, "dark");
-            this.navigateToMainPage();
+            this.navigateToMainPage(data.message);
           },
           error=> {
-            this.showToast('Erro ao tentar entrar!', 4000);
+            this.showToast('Erro ao tentar entrar!', 4000, "danger");
           }
         )
     }
