@@ -21,6 +21,7 @@ export class ProfilePage {
   age: number;
   familyID: string;
   joinFamilyID: string;
+  canGoBack = false;
   family: any;
   members: {
     name: string,
@@ -49,28 +50,33 @@ export class ProfilePage {
     toast.present();
   }
 
+  makeRefresh() {
+    this.profileApi.getProfile(this.profileID).subscribe(
+      (data: any)=>{
+        this.name = data.name;
+        this.email = data.email;
+        this.age = data.age;
+      },
+      error=>{
+        this.showToast("Ocorreu um erro" ,3000, "danger");
+      }
+    )
+    this.familyApi.getFamily(this.familyID).subscribe(
+      (data: any)=>{
+        this.family = data;
+        this.members = data.members;
+        this.canGoBack = true;
+      },
+      error=>{
+        this.showToast("Ocorreu um erro" ,3000, "danger");
+      }
+    )
+  }
+
   doRefresh(event) {
     console.log('Begin async operation');
     try {
-      this.profileApi.getProfile(this.profileID).subscribe(
-        (data: any)=>{
-          this.name = data.name;
-          this.email = data.email;
-          this.age = data.age;
-        },
-        error=>{
-          this.showToast("Ocorreu um erro" ,3000, "danger");
-        }
-      )
-      this.familyApi.getFamily(this.familyID).subscribe(
-        (data: any)=>{
-          this.family = data;
-          this.members = data.members;
-        },
-        error=>{
-          this.showToast("Ocorreu um erro" ,3000, "danger");
-        }
-      )
+      this.makeRefresh();
     } finally {
       event.target.complete();
     }
@@ -114,22 +120,25 @@ export class ProfilePage {
   }
 
   joinFamily() {
-    this.familyApi.addMemberToFamily(this.profileID, {
-      family: this.familyID
-    }).subscribe(
-      data=>{
-        this.familyApi.getFamily(this.joinFamilyID).subscribe(
-          (data: any)=> {
-            this.familyID = data._id;
-            this.showToast('Você se tornou membro de uma família! Atualize a página para ver mais detalhes!', 5000, 'success');
+    this.familyApi.getFamily(this.joinFamilyID).subscribe(
+      (data: any)=> {
+        this.familyID = data._id;
+        console.log(this.familyID);
+        console.log(this.profileID);
+        this.familyApi.addMemberToFamily(this.profileID, {
+          family: this.familyID
+        }).subscribe(
+          data=>{
+            this.showToast('Você se tornou membro de uma família!', 5000, 'success');
+            this.makeRefresh();
           },
           error=>{
-            this.showToast('Erro, esta família não existe', 5000, 'danger');
+            this.showToast('Erro ao se juntar a uma família', 3000, 'danger');
           }
         )
       },
       error=>{
-        this.showToast('Erro ao se juntar a uma família', 3000, 'danger');
+        this.showToast('Erro, esta família não existe', 5000, 'danger');
       }
     )
   }

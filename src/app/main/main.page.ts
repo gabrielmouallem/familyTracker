@@ -19,6 +19,7 @@ export class MainPage implements OnInit {
   geolocationID;
   myLatitude = -14.604847;
   myLongitude = -58.666806;
+  intervalID;
   myZoom = 2;
   members: any[] = [];
 
@@ -117,7 +118,9 @@ export class MainPage implements OnInit {
 
     if (this.profileID) {
       localStorage.setItem('profile_id', this.profileID);
-      this.getFamilyPositions(this.profileID);
+      this.intervalID = setInterval(()=>{
+        this.getFamilyPositions(this.profileID);
+      },5000)
       this.profileApi.getProfile(this.profileID).subscribe(
         (data: any) => {
           if (!data?.family) {
