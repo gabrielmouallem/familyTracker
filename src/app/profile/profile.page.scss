@@ -23,6 +23,23 @@
     margin-right: 5px;
 }
 
+.list-icon {
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.container-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.family-title-button {
+    margin-left: 10px;
+    margin-bottom: -5px;
+}
+
 .pulse {
     border-radius: 5px;
     animation-name: stretch; 

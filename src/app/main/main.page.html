@@ -18,15 +18,15 @@
   <agm-map
     class="main-map"
     (mapReady)="mapReading()"
-    [latitude]="-22.412292"
-    [longitude]="-45.449787"
-    [zoom]="18"
+    [latitude]="myLatitude"
+    [longitude]="myLongitude"
+    [zoom]="myZoom"
     disableDefaultUI="false"
     zoomControl="false"
     >
     <agm-marker
-      [latitude]="-22.412292"
-      [longitude]="-45.449787"
+      [latitude]="myLatitude"
+      [longitude]="myLongitude"
       animation="BOUNCE"
       iconUrl="../../assets/markers/blue-person-marker.png">
     </agm-marker>

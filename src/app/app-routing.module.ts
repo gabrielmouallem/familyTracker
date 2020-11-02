@@ -18,6 +18,14 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'edit-family-modal',
+    loadChildren: () => import('./edit-family-modal/edit-family-modal.module').then( m => m.EditFamilyModalPageModule)
+  },
+  {
+    path: 'create-family-modal',
+    loadChildren: () => import('./create-family-modal/create-family-modal.module').then( m => m.CreateFamilyModalPageModule)
+  },
 ];
 
 @NgModule({

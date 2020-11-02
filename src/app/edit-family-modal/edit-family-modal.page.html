@@ -1,0 +1,20 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Editar Família</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-item style="margin-top: 30px;">
+      <ion-label position="floating">Sobrenome da Família</ion-label>
+      <ion-input type="text" color="dark" [(ngModel)]="surname"></ion-input>
+    </ion-item>
+  </div>
+  <ion-button color="primary" expand="block" (click)="saveFamily()" style="width: 100%;">
+    SALVAR
+  </ion-button>
+</ion-content>

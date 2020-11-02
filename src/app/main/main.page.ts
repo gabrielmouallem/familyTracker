@@ -16,8 +16,9 @@ export class MainPage implements OnInit {
   userLocationMarkerAnimation;
 
   geolocationID;
-  myLatitude;
-  myLongitude;
+  myLatitude = -14.604847;
+  myLongitude = -58.666806;
+  myZoom = 2;
 
   profileID = window.location.href.split("?profile_id=")[1];
 
@@ -61,12 +62,14 @@ export class MainPage implements OnInit {
         if (position && this.profileID) {
           this.myLatitude = position.coords.latitude;
           this.myLongitude = position.coords.longitude;
+          this.myZoom = 18;
           var body = {
             coordinates: [
               this.myLongitude,
               this.myLatitude
             ]
           }
+            console.log(body)
           this.positionApi.updatePosition(this.profileID, body).subscribe(
             data=>{
               console.log("posição atualizada")

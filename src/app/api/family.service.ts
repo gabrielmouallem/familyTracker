@@ -15,4 +15,8 @@ export class FamilyService {
     return this.http.get(apiURL+"family/"+id);
   };
 
+  updateFamily(id, body) {
+    return this.http.put(apiURL+"family/"+id, body);
+  }
+
 }

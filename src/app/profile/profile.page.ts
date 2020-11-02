@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { FamilyService } from '../api/family.service';
 import { ProfileService } from '../api/profile.service';
+import { EditFamilyModalPage } from '../edit-family-modal/edit-family-modal.page';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,10 @@ export class ProfilePage implements OnInit {
   age: number;
   familyID: string;
   family: any;
+  members: {
+    name: string,
+    age: number
+  }[] = [];
 
   platform = 'android';
 
@@ -24,6 +29,7 @@ export class ProfilePage implements OnInit {
     private profileApi: ProfileService,
     private familyApi: FamilyService,
     private toast: ToastController,
+    public modalController: ModalController
   ) { }
 
   async showToast(message, duration, color="light") {
@@ -38,18 +44,40 @@ export class ProfilePage implements OnInit {
 
   doRefresh(event) {
     console.log('Begin async operation');
-    this.profileApi.getProfile(this.profileID).subscribe(
-      (data: any)=>{
-        this.name = data.name;
-        this.email = data.email;
-        this.age = data.age;
-        event.target.complete();
-      },
-      error=>{
-        this.showToast("Ocorreu um erro" ,3000, "danger");
-        event.target.complete();
+    try {
+      this.profileApi.getProfile(this.profileID).subscribe(
+        (data: any)=>{
+          this.name = data.name;
+          this.email = data.email;
+          this.age = data.age;
+        },
+        error=>{
+          this.showToast("Ocorreu um erro" ,3000, "danger");
+        }
+      )
+      this.familyApi.getFamily(this.familyID).subscribe(
+        (data: any)=>{
+          this.family = data;
+          this.members = data.members;
+        },
+        error=>{
+          this.showToast("Ocorreu um erro" ,3000, "danger");
+        }
+      )
+    } finally {
+      event.target.complete();
+    }
+  }
+
+  async presentEditFamilyModal() {
+    const modal = await this.modalController.create({
+      component: EditFamilyModalPage,
+      cssClass: '../edit-family-modal/./edit-family-modal.page.scss',
+      componentProps: {
+        "family": this.family
       }
-    )
+    });
+    return await modal.present();
   }
 
   saveProfile() {
@@ -80,6 +108,7 @@ export class ProfilePage implements OnInit {
           this.familyApi.getFamily(this.familyID).subscribe(
             (data: any)=>{
               this.family = data;
+              this.members = data.members;
             },
             error=>{
 
