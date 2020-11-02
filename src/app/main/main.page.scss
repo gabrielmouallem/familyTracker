@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin-top: -30px;
 }
 
@@ -25,10 +25,24 @@
 
 .arrow-down-overlay {
     position: relative;
+    top: -3px;
+    left: 2px;
     width: 0px;
     height: 0px;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 15px solid  rgb(65, 201, 53);
+    border-radius: 2px;
+}
+
+.arrow-down-overlay-blue {
+    position: relative;
+    top: -3px;
+    left: 2px;
+    width: 0px;
+    height: 0px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid  royalblue;
     border-radius: 2px;
 }

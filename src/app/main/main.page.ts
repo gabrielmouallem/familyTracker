@@ -46,11 +46,7 @@ export class MainPage implements OnInit {
     console.log("getFamilyPositions ", profileID);
     this.familyApi.getFamilyPositions(profileID).subscribe(
       (data: any[])=>{
-        data.forEach((member)=>{
-          if (member.profile !== profileID){
-            this.members.push(member);
-          }
-        })
+        this.members = data;
       },
       error=>{
         // this.showToast('Erro ao obter localização dos membros da família.', 2000, 'danger');

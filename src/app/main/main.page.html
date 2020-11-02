@@ -20,12 +20,22 @@
   <agm-map class="main-map" (mapReady)="mapReading()" [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="myZoom"
     disableDefaultUI="false" zoomControl="false">
     <agm-overlay [latitude]="myLatitude" [longitude]="myLongitude">
-      <!-- blue html square -->
       <div class="marker-container">
         <div class="marker-title">
           VOCÊ
         </div>
         <div class="arrow-down-overlay">
+        </div>
+      </div>
+    </agm-overlay>
+    <agm-overlay *ngFor="let member of members" [latitude]="member.coordinates[1]" [longitude]="member.coordinates[0]">
+      <div *ngIf="member">
+        <div class="marker-container">
+          <div class="marker-title" style="background-color: royalblue;">
+            {{member.name}}
+          </div>
+          <div class="arrow-down-overlay-blue">
+          </div>
         </div>
       </div>
     </agm-overlay>
