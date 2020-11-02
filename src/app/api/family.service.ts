@@ -11,6 +11,10 @@ export class FamilyService {
     private http: HttpClient,
   ) { }
 
+  getFamilyPositions(profileID) {
+    return this.http.get(apiURL+"family/positions/"+profileID);
+  }
+
   addMemberToFamily(profileID, body) {
     return this.http.put(apiURL+"profile/"+profileID, body);
   }

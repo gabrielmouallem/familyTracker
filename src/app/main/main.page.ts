@@ -4,6 +4,7 @@ import { NavController, ToastController } from '@ionic/angular';
 import { FamilyService } from '../api/family.service';
 import { ProfileService } from '../api/profile.service';
 import { Geolocation, GeolocationOptions } from '@capacitor/core';
+
 import { PositionService } from '../api/position.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class MainPage implements OnInit {
   myLatitude = -14.604847;
   myLongitude = -58.666806;
   myZoom = 2;
+  members: any[] = [];
 
   profileID = window.location.href.split("?profile_id=")[1];
 
@@ -27,6 +29,7 @@ export class MainPage implements OnInit {
     private profileApi: ProfileService,
     private positionApi: PositionService,
     private toast: ToastController,
+    private familyApi: FamilyService
   ) { }
 
   async showToast(message, duration, color="light") {
@@ -39,19 +42,39 @@ export class MainPage implements OnInit {
     toast.present();
   }
 
+  getFamilyPositions(profileID) {
+    console.log("getFamilyPositions ", profileID);
+    this.familyApi.getFamilyPositions(profileID).subscribe(
+      (data: any[])=>{
+        data.forEach((member)=>{
+          if (member.profile !== profileID){
+            this.members.push(member);
+          }
+        })
+      },
+      error=>{
+        // this.showToast('Erro ao obter localização dos membros da família.', 2000, 'danger');
+      }
+    )
+  }
 
   mapReading() {
     this.userLocationMarkerAnimation = 'BOUNCE';
   }
 
   navigateToProfilePage() {
-    this.navCtrl.navigateForward('/profile');
+    this.navCtrl.navigateForward('/profile?geolocation_id='+this.geolocationID);
   }
 
   navigateToLoginPage() {
     this.navCtrl.navigateBack('/');
     localStorage.clear();
+    this.disablePositionWatcher();
   }
+
+  disablePositionWatcher() {
+    Geolocation.clearWatch({ id: this.geolocationID });
+  };
 
   async getHighAccuracyPosition() {
     const options: GeolocationOptions = {
@@ -88,7 +111,7 @@ export class MainPage implements OnInit {
         }
         if (err) {
           console.log(err);
-            this.showToast('Erro ao obter sua localização', 2000, 'danger');
+            // this.showToast('Erro ao obter sua localização', 2000, 'danger');
         }
     });
 }
@@ -98,6 +121,7 @@ export class MainPage implements OnInit {
 
     if (this.profileID) {
       localStorage.setItem('profile_id', this.profileID);
+      this.getFamilyPositions(this.profileID);
       this.profileApi.getProfile(this.profileID).subscribe(
         (data: any) => {
           if (!data?.family) {

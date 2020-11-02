@@ -48,6 +48,16 @@
     animation-play-state: running; 
 }
 
+.pulse-2 {
+    border-radius: 5px;
+    animation-name: stretch; 
+    animation-duration: 0.6s; 
+    animation-timing-function: ease-out; 
+    animation-direction: alternate; 
+    animation-iteration-count: infinite; 
+    animation-play-state: running; 
+}
+
 .card-container {
     border: 1px solid rgba(0,0,0,0.1);
     ion-item{

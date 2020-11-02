@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Geolocation } from '@capacitor/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FamilyService } from '../api/family.service';
 import { ProfileService } from '../api/profile.service';
 import { CreateFamilyModalPage } from '../create-family-modal/create-family-modal.page';
 import { EditFamilyModalPage } from '../edit-family-modal/edit-family-modal.page';
+import { Plugins } from '@capacitor/core';
+
+const { Clipboard } = Plugins;
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +20,7 @@ export class ProfilePage {
   email: string;
   age: number;
   familyID: string;
+  joinFamilyID: string;
   family: any;
   members: {
     name: string,
@@ -25,6 +30,7 @@ export class ProfilePage {
   platform = 'android';
 
   profileID: string;
+  geoLocationID: any = window.location.href.split("?geolocation_id=")[1];
 
   constructor(
     private profileApi: ProfileService,
@@ -107,6 +113,34 @@ export class ProfilePage {
     )
   }
 
+  joinFamily() {
+    this.familyApi.addMemberToFamily(this.profileID, {
+      family: this.familyID
+    }).subscribe(
+      data=>{
+        this.familyApi.getFamily(this.joinFamilyID).subscribe(
+          (data: any)=> {
+            this.familyID = data._id;
+            this.showToast('Você se tornou membro de uma família! Atualize a página para ver mais detalhes!', 5000, 'success');
+          },
+          error=>{
+            this.showToast('Erro, esta família não existe', 5000, 'danger');
+          }
+        )
+      },
+      error=>{
+        this.showToast('Erro ao se juntar a uma família', 3000, 'danger');
+      }
+    )
+  }
+
+  copyToClipboard() {
+    Clipboard.write({
+      string: this.familyID
+    });
+    this.showToast('ID da Família copiado para área de transferência!', 3000, 'dark');
+  };
+
   ionViewWillEnter() {
     this.profileID = localStorage.getItem('profile_id');
     this.profileApi.getProfile(this.profileID).subscribe(
@@ -132,6 +166,11 @@ export class ProfilePage {
         this.showToast("Ocorreu um erro" ,3000, "danger");
       }
     )
+  }
+
+  ionViewWillLeave() {
+    Geolocation.clearWatch({id: this.geoLocationID});
+    localStorage.clear();
   }
 
 }
