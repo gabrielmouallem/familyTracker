@@ -19,7 +19,7 @@
   </ion-fab>
   <agm-map class="main-map" (mapReady)="mapReading()" [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="myZoom"
     disableDefaultUI="false" zoomControl="false">
-    <agm-overlay [latitude]="myLatitude" [longitude]="myLongitude">
+    <!-- <agm-overlay [latitude]="myLatitude" [longitude]="myLongitude">
       <div class="marker-container">
         <div class="marker-title">
           VOCÊ
@@ -27,7 +27,7 @@
         <div class="arrow-down-overlay">
         </div>
       </div>
-    </agm-overlay>
+    </agm-overlay> -->
     <agm-overlay *ngFor="let member of members" [latitude]="member.coordinates[1]" [longitude]="member.coordinates[0]">
       <div *ngIf="member">
         <div class="marker-container">
