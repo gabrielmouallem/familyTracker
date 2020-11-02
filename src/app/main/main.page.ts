@@ -56,7 +56,7 @@ export class MainPage implements OnInit {
   async getHighAccuracyPosition() {
     const options: GeolocationOptions = {
         enableHighAccuracy: true,
-        timeout: 10000
+        timeout: 30000
     }
     this.geolocationID = await Geolocation.watchPosition(options, (position, err) => {
         if (position && this.profileID) {
@@ -93,9 +93,8 @@ export class MainPage implements OnInit {
     });
 }
 
-  ngOnInit() {
-
-    this.getHighAccuracyPosition();
+  ionViewWillEnter() {
+    console.log("WillEnter")
 
     if (this.profileID) {
       localStorage.setItem('profile_id', this.profileID);
@@ -109,7 +108,13 @@ export class MainPage implements OnInit {
   
         }
       )
+    } else {
+      this.profileID = localStorage.getItem('profile_id');
     }
+    this.getHighAccuracyPosition();
+  }
+
+  ngOnInit() {
   }
 
 }

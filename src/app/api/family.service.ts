@@ -11,6 +11,14 @@ export class FamilyService {
     private http: HttpClient,
   ) { }
 
+  addMemberToFamily(profileID, body) {
+    return this.http.put(apiURL+"profile/"+profileID, body);
+  }
+
+  createFamily(body) {
+    return this.http.post(apiURL+"family/", body);
+  }
+
   getFamily(id) {
     return this.http.get(apiURL+"family/"+id);
   };

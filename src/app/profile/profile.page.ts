@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FamilyService } from '../api/family.service';
 import { ProfileService } from '../api/profile.service';
+import { CreateFamilyModalPage } from '../create-family-modal/create-family-modal.page';
 import { EditFamilyModalPage } from '../edit-family-modal/edit-family-modal.page';
 
 @Component({
@@ -9,7 +10,7 @@ import { EditFamilyModalPage } from '../edit-family-modal/edit-family-modal.page
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
 
   name: string;
   email: string;
@@ -80,6 +81,17 @@ export class ProfilePage implements OnInit {
     return await modal.present();
   }
 
+  async presentCreateFamilyModal() {
+    const modal = await this.modalController.create({
+      component: CreateFamilyModalPage,
+      cssClass: '../create-family-modal/./create-family-modal.page.scss',
+      componentProps: {
+        "profile_id": this.profileID
+      }
+    });
+    return await modal.present();
+  }
+
   saveProfile() {
     this.profileApi.updateProfile(this.profileID, {
       name: this.name,
@@ -95,7 +107,7 @@ export class ProfilePage implements OnInit {
     )
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.profileID = localStorage.getItem('profile_id');
     this.profileApi.getProfile(this.profileID).subscribe(
       (data: any)=>{

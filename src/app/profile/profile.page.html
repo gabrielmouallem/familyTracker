@@ -47,13 +47,13 @@
           </ion-label>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="danger">DESVINCULAR</ion-item-option>
+          <!-- <ion-item-option color="danger">DESVINCULAR</ion-item-option> -->
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
   </div>
   <div *ngIf="!familyID">
-    <ion-button color="danger" expand="full" style="margin-top: 20px;" class="pulse">
+    <ion-button color="danger" expand="block" style="margin-top: 20px;" class="pulse" (click)="presentCreateFamilyModal()">
       <ion-icon name="people-circle-outline" class="family-icon-button"></ion-icon>
       CADASTRAR MINHA FAMÍLIA
     </ion-button>
