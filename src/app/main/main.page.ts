@@ -88,6 +88,7 @@ export class MainPage implements OnInit {
           if(!this.flag){
             this.myCenterLatitude = position.coords.latitude;
             this.myCenterLongitude = position.coords.longitude;
+            this.flag = true;
           }
           this.myZoom = 18;
           var body = {
