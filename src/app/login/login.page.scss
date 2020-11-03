@@ -1,4 +1,4 @@
-@import '../../theme/Mixins.scss';
+@import "../../theme/Mixins.scss";
 
 .main-container {
     display: flex;
@@ -37,6 +37,10 @@
         padding-bottom: 10%;
         background-size: 200% 200%;
     }
+}
+
+.item-input::after {
+    border-bottom-color: transparent !important;
 }
 
 .logo {
