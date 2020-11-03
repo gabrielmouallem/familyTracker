@@ -24,7 +24,6 @@ export class MainPage implements OnInit {
   intervalID;
   myZoom = 2;
   members: any[] = [];
-  flag: boolean = false;
 
   profileID = window.location.href.split("?profile_id=")[1];
 
@@ -81,15 +80,14 @@ export class MainPage implements OnInit {
         enableHighAccuracy: true,
         timeout: 30000
     }
+    const position = await Geolocation.getCurrentPosition(options);
+    this.myCenterLatitude = position.coords.latitude;
+    this.myCenterLongitude = position.coords.longitude;
+
     this.geolocationID = await Geolocation.watchPosition(options, (position, err) => {
         if (position && this.profileID) {
           this.myLatitude = position.coords.latitude;
           this.myLongitude = position.coords.longitude;
-          if(!this.flag){
-            this.myCenterLatitude = position.coords.latitude;
-            this.myCenterLongitude = position.coords.longitude;
-            this.flag = true;
-          }
           this.myZoom = 18;
           var body = {
             coordinates: [
