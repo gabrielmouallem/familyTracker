@@ -19,9 +19,12 @@ export class MainPage implements OnInit {
   geolocationID;
   myLatitude = -14.604847;
   myLongitude = -58.666806;
+  myCenterLatitude = -14.604847;
+  myCenterLongitude = -58.666806;
   intervalID;
   myZoom = 2;
   members: any[] = [];
+  flag: boolean = false;
 
   profileID = window.location.href.split("?profile_id=")[1];
 
@@ -82,6 +85,10 @@ export class MainPage implements OnInit {
         if (position && this.profileID) {
           this.myLatitude = position.coords.latitude;
           this.myLongitude = position.coords.longitude;
+          if(!this.flag){
+            this.myCenterLatitude = position.coords.latitude;
+            this.myCenterLongitude = position.coords.longitude;
+          }
           this.myZoom = 18;
           var body = {
             coordinates: [

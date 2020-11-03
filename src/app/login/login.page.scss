@@ -44,10 +44,6 @@
     font-size: 170px;
 }
 
-ion-item.item-has-focus > ion-label {
-    color: black !important;
-}
-
 ion-label {
     opacity: 0.7;
 }
@@ -66,7 +62,6 @@ ion-item {
     border-radius: 15px;
     background-color: white;
     --border-color: transparent;
-    padding-bottom: 5px;
     margin-bottom: 8px;
 }
 

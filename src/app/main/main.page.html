@@ -17,7 +17,7 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <agm-map class="main-map" (mapReady)="mapReading()" [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="myZoom"
+  <agm-map class="main-map" (mapReady)="mapReading()" [latitude]="myCenterLatitude" [longitude]="myCenterLongitude" [zoom]="myZoom"
     disableDefaultUI="false" zoomControl="false">
     <!-- <agm-overlay [latitude]="myLatitude" [longitude]="myLongitude">
       <div class="marker-container">
